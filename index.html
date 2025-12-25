@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤ From My Heart</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(#8b0000, #ff4d4d);
+  color:white;
+  text-align:center;
+}
+.container{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.card{
+  background:rgba(255,255,255,0.15);
+  padding:25px;
+  border-radius:20px;
+  width:90%;
+  max-width:400px;
+}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  outline:none;
+}
+button{
+  margin-top:15px;
+  padding:10px 25px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+img{
+  width:100%;
+  border-radius:15px;
+  margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="card" id="content">
+    <h2 id="question"></h2>
+
+    <input
+      type="text"
+      id="answer"
+      placeholder="Type your answer here..."
+    >
+
+    <br><br>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+</div>
+
+<script>
+/* ===== EDIT QUESTIONS HERE ===== */
+const questions = [
+  "What do you love the most about us?",
+  "When do you feel happiest with me?",
+  "Which moment of ours lives in your heart?",
+  "What do I mean to you?",
+  "One memory you'll never forget?",
+  "Bonus: What do you want us to become?"
+];
+
+let current = 0;
+let answers = [];
+
+/* ===== SHOW QUESTION ===== */
+function showQuestion(){
+  document.getElementById("question").innerText = questions[current];
+  document.getElementById("answer").value = "";
+}
+
+/* ===== NEXT QUESTION ===== */
+function nextQuestion(){
+  const ans = document.getElementById("answer").value.trim();
+
+  if(ans === ""){
+    alert("Please write something ❤");
+    return;
+  }
+
+  answers.push(ans);
+  current++;
+
+  if(current < questions.length){
+    showQuestion();
+  } else {
+    showFinal();
+  }
+}
+
+/* ===== FINAL PAGE ===== */
+function showFinal() {
+  let html = `
+  <h2>❤ From My Heart</h2>
+
+  <p>
+  “Anshu, sach bolun toh, tujhe sochte hi meri har din ki thakaan aur tension ek dum fade ho jaati hai.Teri ek si smile, ek chhota sa message, ya bas teri presence… sab kuch mere liye itna special lagta hai ki words kabhi kaafi nahi hote explain karne ke liye. Tere saath baat karna, teri hasi sunna, tere saath chhoti-chhoti baatein share karna… ye sab cheezein addictive ho gayi hain, jaise har din thoda aur tera saath chahiye. Tu jab hasti hai, Anshu, lagta hai duniya thodi slow ho gayi ho sirf mere liye, aur bas main wahi moment enjoy karna chahta hoon. Main future ke bare mein itna stress nahi lena chahta, bas ye jaanta hoon ki aaj aur har pal main tera hoon, aur tu mere liye perfect hai. Teri har chhoti aadat, har baat, har nazar mujhe aur zyada khinchti hai teri taraf. Honestly, Anshu, tere bina ye duniya thodi empty lagti hai, aur tere saath har pal ek naya excitement le aata hai. Main bas yahi chahunga ki hum hamesha aise hi saath ho, mazaak kare, hase, aur ek dusre ko special feel karaye… kyunki tu meri life ka woh part hai jo complete aur perfect bana deta hai.”
+  </p>
+
+  <img src="photo3jpg.jpg" class="final-img">
+  <img src="photo5jpg.jpg" class="final-img">
+
+  <hr style="margin:20px 0">
+
+  <h3>💖 Your Answers</h3>
+  `;
+
+  answers.forEach((a, i) => {
+    html += `
+      <p>
+        <strong>${questions[i]}</strong><br>
+        ${a}
+      </p>
+    `;
+  });
+
+  document.getElementById("content").innerHTML = html;
+}
+
+window.onload = showQuestion;
+</script>
+
+</body>
+</html>
